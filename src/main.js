@@ -4,7 +4,7 @@ import router from './routers'
 import store from './stores'
 
 import axios from 'axios'
-//  vue.prototype.axios = axios;
+
  Vue.prototype.axios = axios;
 
 //  Vue.filter('serWH',(url,avg)=>
@@ -14,6 +14,13 @@ import axios from 'axios'
  Vue.filter('setWH',(url , arg)=>{
   return url.replace(/w\.h/,arg);
 });
+
+import Scroller from '@/components/Scroller'
+Vue.component('Scroller',Scroller);
+
+import Loading from '@/components/Loading'
+Vue.component('Loading',Loading);
+
 Vue.config.productionTip = false
 
 new Vue({
