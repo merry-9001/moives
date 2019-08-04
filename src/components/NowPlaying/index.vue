@@ -3,13 +3,13 @@
         <!-- <Loading v-if="isLoading" />
         <Scroller v-else :handleToScroll="handleToScroll" :handleToTouchEnd="handleToTouchEnd"> -->
             <ul>
-                <li>
-                    <div class="pic_show"><img src="/images/1.jpeg"></div>
+                <li v-for="item in movieList" :key="item.id">
+                    <div class="pic_show"><img :src="item.img | setWH('128.180')"></div>
                     <div class="info_list">
-                        <h2>无名之辈</h2>
-                        <p>观众评 <span class="grade">9.2</span></p>
-                        <p>主演: 陈建斌,任素汐,潘斌龙</p>
-                        <p>今天55家影院放映607场</p>
+                        <h2>{{item.nm}} <img v-if="item.version"  src="@/assets/max.png" alt=""></h2>
+                        <p>观众评 <span class="grade">{{item.sc}}</span></p>
+                        <p>主演:{{item.star}}</p>
+                        <p>{{item.showInfo}}</p>
                     </div>
                     <div class="btn_mall">
                         购票
@@ -35,7 +35,25 @@
 
 <script>
 export default {
-    name:'NowPlaying'
+    name:'NowPlaying',
+    data(){
+        return {
+            movieList:[]
+        }
+    },
+    mounted()
+    {
+        this.axios.get('/api/MoivePlaying').then((res)=>
+        {
+         //   console.log(res);
+      //  this.axios.get('/api/MoivePlaying').then((res)=>{
+            var msg=res.data.msg;
+            if(msg==='ok'){
+                //console.log(msg);
+                this.movieList=res.data.data.movieList;
+            }
+        })
+    }
 }
 </script>
 

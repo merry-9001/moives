@@ -9,13 +9,13 @@
         <div class="search_result">
             <h3>电影/电视剧/综艺</h3>
             <ul>
-                <li>
-                    <div class="img"><img src="/images/1.jpeg"></div>
+                <li v-for="item in moviesList" :key="item.id">
+                    <div class="img"><img :src="item.img | setWH('128.180')"></div>
                     <div class="info">
-                        <p><span>无名之辈</span><span>8.5</span></p>
-                        <p>A Cool Fish</p>
-                        <p>剧情,喜剧,犯罪</p>
-                        <p>yk无敌</p>
+                        <p><span>{{item.nm}}</span><span>{{item.sc}}</span></p>
+                        <p>{{item.enm}}</p>
+                        <p>{{item.cat}}</p>
+                        <p>{{item.rt}}</p>
                     </div>
                 </li>
                 <!-- <li v-for="item in moviesList" :key="item.id">
@@ -34,7 +34,37 @@
 
 <script>
 export default {
-    name:'Search'
+    name:'Search',
+    data()
+    {
+        return{
+            message:'',
+            moviesList:[]
+        }
+    },
+    methods : {
+        cancelRequest(){
+            if(typeof this.source ==='function'){
+                this.source('终止请求')
+            }
+        }
+    },
+    watch:{
+        message(newVal)
+        {
+            // console.log(newVal);
+            this.axios.get('/api/search'+'?kw='+newVal).then((res)=>
+            {
+                console.log(res);
+                var msg=res.data.msg;
+                var movies=res.data.data.movies;
+                if(msg && movies)
+                {
+                    this.moviesList=res.data.data.movies.list;
+                }
+            })
+        }
+    }
 }
 </script>
 

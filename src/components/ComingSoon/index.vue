@@ -3,13 +3,13 @@
         <!-- <Loading v-if="isLoading" />
         <Scroller v-else> -->
             <ul>
-                <li>
-                    <div class="pic_show"><img src="/images/1.jpeg"></div>
+                <li v-for="item in comingList" :key="item.id">
+                    <div class="pic_show"><img :src="item.img | setWH('120.180')"></div>
                     <div class="info_list">
-                        <h2>无名之辈</h2>
-                        <p><span class="person">17746</span> 人想看</p>
-                        <p>主演: 陈建斌,任素汐,潘斌龙</p>
-                        <p>帅是一辈子的帅</p>
+                        <h2>{{item.nm}} <img v-if="item.version"  src="@/assets/max.png" alt=""></h2>
+                        <p><span class="person">{{item.wish}}</span> 人想看</p>
+                        <p>主演：{{item.star}}</p>
+                        <p>{{item.showInfo}}</p>
                     </div>
                     <div class="btn_pre">
                         预售
@@ -34,7 +34,26 @@
 
 <script>
 export default {
-  name:'ComingSoon'
+  name:'ComingSoon',
+  data()
+  {
+      return{
+          comingList:[]
+      }
+  },
+    mounted()
+    {
+        this.axios.get('/api/ComingSoon').then((res)=>
+        {
+            console.log(res);
+      //  this.axios.get('/api/MoivePlaying').then((res)=>{
+            var msg=res.data.msg;
+            if(msg==='ok'){
+                //console.log(msg);
+                this.comingList=res.data.data.comingList;
+            }
+        })
+    }
 }
 </script>
 
