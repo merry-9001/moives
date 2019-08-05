@@ -9,6 +9,7 @@
 //     }
 // }
 module.exports = {
+    // publicPath:'/movies',
     devServer : {
         proxy : {
             '/api' : {
