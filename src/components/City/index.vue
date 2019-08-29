@@ -83,7 +83,8 @@ export default {
     else
     {
         // this.axios.get('/api/http://39.97.33.178/api/cityListYk').then((res)=>
-        this.axios.get("/api/cityListYk").then(res => {
+        // this.axios.get("/HelloTP1/public/admin/api/cityListYk").then(res => {
+            this.axios.get("/api/cityListYk").then(res => {
           //  console.log(res);
           var msg = res.data.msg;
           if (msg === "ok") {

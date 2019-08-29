@@ -6,9 +6,10 @@ import cinemaRouter from './cinema'
 Vue.use(Router)
 
 export default new Router({
+  // mode: 'hash',
   mode: 'history',
   base: process.env.BASE_URL,
-  // base:'moives',
+  // base:'/moives/',
   routes: [
     moiveRouter,
     mineRouter,

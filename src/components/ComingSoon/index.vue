@@ -47,13 +47,17 @@ export default {
     {
         this.axios.get('/api/ComingSoon').then((res)=>
         {
-            console.log(res);
-      //  this.axios.get('/api/MoivePlaying').then((res)=>{
+          console.log(res);
+        //this.axios.get('/api/MoivePlaying').then((res)=>{
             var msg=res.data.msg;
             if(msg==='ok'){
                 //console.log(msg);
                 this.comingList=res.data.data.comingList;
+                console.log(this.comingList);
                 this.isLoading=false;
+            }
+            else{
+                console.log('asd');
             }
         })
     },
